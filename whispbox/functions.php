@@ -94,24 +94,25 @@ function get_rate_limits() {
 function save_rate_limits($limits) {
     global $rate_limits_file;
     
-    // convert to json
+    // convert array to json string
     $json_string = json_encode($limits);
     
-    // write to file
+    // write json to file
     file_put_contents($rate_limits_file, $json_string);
 }
 
-// function to check rate limit
+// function to check if user is rate limited
+// TODO: maybe add rate limit by cookie too?
 function check_rate_limit($ip) {
     global $rate_limit_seconds;
     
-    // get all rate limits
+    // get all rate limits from file
     $limits = get_rate_limits();
     
-    // get current time
+    // get the current time stamp
     $current_time = time();
     
-    // check if ip exists in limits
+    // check if this ip exists in limits array
     if (isset($limits[$ip])) {
         // get last time
         $last_time = $limits[$ip];
@@ -138,22 +139,23 @@ function update_rate_limit($ip) {
     // get current time
     $current_time = time();
     
-    // update ip time
+    // update the time for this ip adress
     $limits[$ip] = $current_time;
     
-    // save limits
+    // save the limits back to file
     save_rate_limits($limits);
 }
 
-// function to format time ago
+// function to format time ago (like 5 minutes ago)
+// NOTE: this might not be perfect but it works
 function time_ago($timestamp) {
-    // get current time
+    // get the current time
     $current_time = time();
     
-    // calculate difference
+    // calculate the difference in seconds
     $time_diff = $current_time - $timestamp;
     
-    // check minutes
+    // check if less than 60 seconds
     if ($time_diff < 60) {
         return $time_diff . ' seconds ago';
     }
