@@ -1,18 +1,21 @@
 <?php
 // post.php - handles message submission
 
-// start session
+// DEBUG: testing post handler
+// echo "POST DATA: "; var_dump($_POST); die();
+
+// start session first
 session_start();
 
-// include config file
+// include the config file
 include 'config.php';
 
-// include functions file
+// include the functions file
 include 'functions.php';
 
-// check if form was submitted
+// check if this is a post request
 if ($_SERVER['REQUEST_METHOD'] != 'POST') {
-    // not a post request
+    // not a post request, redirect
     $_SESSION['error'] = 'Invalid request';
     header('Location: index.php');
     exit;

@@ -1,7 +1,10 @@
 <?php
 // admin.php - admin login and moderation panel
 
-// start session
+// DEBUG: uncomment to test admin session
+// session_start(); $_SESSION['is_admin'] = true; echo "Admin set!"; die();
+
+// start session for login
 session_start();
 
 // include config file
@@ -10,9 +13,9 @@ include 'config.php';
 // include functions file
 include 'functions.php';
 
-// check if logout
+// check if user wants to logout
 if (isset($_GET['logout'])) {
-    // logout admin
+    // logout the admin user
     $_SESSION['is_admin'] = false;
     unset($_SESSION['is_admin']);
     session_destroy();

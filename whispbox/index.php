@@ -1,17 +1,23 @@
 <?php
 // index.php - main page that shows all messages
 
-// start session
+// start the session for error messages
 session_start();
 
-// include config file
+// include config file with settings
 include 'config.php';
 
-// include functions file
+// include functions file with helper functions
 include 'functions.php';
 
-// get all messages from json
+// DEBUG: check if messages file exists
+// echo "File exists: " . file_exists($messages_file);
+
+// get all messages from json file
 $all_messages = get_all_messages();
+
+// DEBUG: count messages
+// echo "Total messages: " . count($all_messages);
 
 // store messages in another var
 $messages = $all_messages;
