@@ -214,9 +214,10 @@ if (isset($_SESSION['error'])) {
             </div>
         <?php endif; ?>
         
-        <!-- footer -->
+        <!-- footer section -->
         <footer>
             <p>WhispBox+ - Anonymous messaging made simple</p>
+            <p style="font-size: 0.8em; color: #999;">Built with ❤️ using PHP | Version 1.0</p>
         </footer>
         
     </div>
