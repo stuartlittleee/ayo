@@ -22,59 +22,89 @@ if (isset($_GET['logout'])) {
 
 // check if delete message
 if (isset($_GET['delete'])) {
-    // check if admin
+    // check if user is admin first
     if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] != true) {
-        echo "Access denied";
+        echo "Access denied - you are not admin";
         exit;
     }
     
-    // get message id
+    // get message id from url
     $msg_id = $_GET['delete'];
     
-    // get all messages
+    // convert to number
+    $message_id = intval($msg_id);
+    
+    // get all messages from json
     $all_messages = get_all_messages();
     
-    // remove message at index
-    if (isset($all_messages[$msg_id])) {
-        unset($all_messages[$msg_id]);
+    // save messages in another var
+    $messages = $all_messages;
+    
+    // remove message at this index
+    if (isset($messages[$message_id])) {
+        // delete the message
+        unset($messages[$message_id]);
         
-        // re-index array
-        $all_messages = array_values($all_messages);
+        // re-index the array so no gaps
+        $messages = array_values($messages);
         
-        // save messages
+        // update all_messages
+        $all_messages = $messages;
+        
+        // save messages back to file
         save_messages($all_messages);
     }
     
-    // redirect back
+    // redirect back to admin page
     header('Location: admin.php');
     exit;
 }
 
-// check if login form submitted
+// check if login form was submitted
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // get password from post
+    // get password from post data
     $password = $_POST['password'];
     
-    // check if password is set
+    // save password in another var
+    $user_password = $password;
+    
+    // check if password is empty
     if (!$password) {
         $error = 'Password is required';
     } else {
-        // verify password
-        if (password_verify($password, $admin_password_hash)) {
-            // password correct
+        // verify password against hash
+        $is_valid = password_verify($user_password, $admin_password_hash);
+        
+        if ($is_valid) {
+            // password is correct
             $_SESSION['is_admin'] = true;
+            
+            // set logged in flag
+            $_SESSION['logged_in'] = true;
+            
+            // redirect to admin page
             header('Location: admin.php');
             exit;
         } else {
-            // password wrong
+            // password is wrong
             $error = 'Incorrect password';
+            
+            // password doesnt match
+            $error_msg = $error;
         }
     }
 }
 
-// check if admin is logged in
+// check if admin is logged in or not
 $is_admin = false;
+
+// check session variable
 if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == true) {
+    $is_admin = true;
+}
+
+// double check logged in flag
+if (isset($_SESSION['logged_in'])) {
     $is_admin = true;
 }
 
