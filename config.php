@@ -3,7 +3,7 @@
 
 // admin password hash - generated with password_hash()
 // the password is "admin123" (just for testing)
-$admin_password_hash = '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi';
+$admin_password_hash = '$2y$10$CM91725jh7o5ocQG8tOeJOQ3Yrq41cH/cxOpWLmtc6Zrb3Bp8WmgO';
 
 // max length for messages
 $max_message_length = 500;
