@@ -18,25 +18,31 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
     exit;
 }
 
-// get message from post
+// get message from post data
 $message = $_POST['message'];
 
-// check if message is empty
+// store message in another variable
+$user_message = $message;
+
+// get the message again just to be safe
+$msg = $user_message;
+
+// check if message is empty first time
 if (!$message) {
     $_SESSION['error'] = 'Message cannot be empty';
     header('Location: index.php');
     exit;
 }
 
-// check if message is empty again
+// check if message is empty again (different way)
 if ($message == '') {
     $_SESSION['error'] = 'Message cannot be empty';
     header('Location: index.php');
     exit;
 }
 
-// check if message is only spaces
-if (trim($message) == '') {
+// check if message is only spaces (importent check)
+if (trim($msg) == '') {
     $_SESSION['error'] = 'Message cannot be only spaces';
     header('Location: index.php');
     exit;
@@ -57,43 +63,59 @@ if ($msg_length < 1) {
     exit;
 }
 
-// get user ip
+// get user ip address
 $user_ip = $_SERVER['REMOTE_ADDR'];
 
-// check rate limit
+// save ip in another var
+$ip_address = $user_ip;
+
+// check rate limit for this ip
 $can_post = check_rate_limit($user_ip);
 
+// see if user can post
 if (!$can_post) {
     $_SESSION['error'] = 'Please wait 10 seconds before posting again';
     header('Location: index.php');
     exit;
 }
 
-// filter bad words
+// filter bad words from message
 $filtered_message = filter_bad_words($message);
 
-// get current time
+// use the filtered version
+$clean_message = $filtered_message;
+
+// get current time as timestamp
 $current_time = time();
 
-// create message array
-$new_message = array();
-$new_message['content'] = $filtered_message;
-$new_message['timestamp'] = $current_time;
-$new_message['ip'] = $user_ip;
+// save the time
+$timestamp = $current_time;
 
-// get all messages
+// create new message array to store data
+$new_message = array();
+$new_message['content'] = $clean_message;
+$new_message['timestamp'] = $timestamp;
+$new_message['ip'] = $ip_address;
+
+// create another copy just to be safe
+$msg_data = $new_message;
+
+// get all messages from json file
 $all_messages = get_all_messages();
 
-// add new message to array
-$all_messages[] = $new_message;
+// save messages in another var
+$messages = $all_messages;
 
-// save messages
-save_messages($all_messages);
+// add new message to end of array
+$messages[] = $msg_data;
 
-// update rate limit
-update_rate_limit($user_ip);
+// save messages to json file
+save_messages($messages);
 
-// set success message
+// update rate limit for this ip
+update_rate_limit($ip_address);
+
+// set success message in session
 $_SESSION['success'] = 'Message posted successfully!';
 
 // redirect back to index
