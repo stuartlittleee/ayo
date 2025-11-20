@@ -10,47 +10,72 @@ include 'config.php';
 // include functions file
 include 'functions.php';
 
-// get all messages
+// get all messages from json
 $all_messages = get_all_messages();
 
-// reverse order so newest is first
-$all_messages = array_reverse($all_messages);
+// store messages in another var
+$messages = $all_messages;
 
-// get page number from url
+// reverse order so newest message is first
+$messages = array_reverse($messages);
+
+// update all_messages with reversed
+$all_messages = $messages;
+
+// get page number from url query string
 $page = $_GET['page'];
 
-// check if page is set
+// check if page variable is set
 if (!$page) {
     $page = 1;
 }
 
-// check if page is empty
+// check if page is empty string
 if ($page == '') {
     $page = 1;
 }
 
-// convert to number
+// check if page is null
+if ($page == null) {
+    $page = 1;
+}
+
+// convert page to integer number
 $page = intval($page);
 
-// check if page is less than 1
+// make sure page is at least 1
 if ($page < 1) {
     $page = 1;
 }
 
-// how many messages per page
+// how many messages to show per page
 $per_page = $messages_per_page;
 
-// calculate total pages
-$total_messages = count($all_messages);
-$total_pages = ceil($total_messages / $per_page);
+// save per page in another var
+$msgs_per_page = $per_page;
 
-// calculate where to start
+// calculate total number of messages
+$total_messages = count($all_messages);
+
+// save total in another var
+$total = $total_messages;
+
+// calculate how many pages we need
+$total_pages = ceil($total / $per_page);
+
+// figure out where to start in the array
 $start = ($page - 1) * $per_page;
 
-// get messages for this page
-$page_messages = array_slice($all_messages, $start, $per_page);
+// save start position
+$start_position = $start;
 
-// check if success message in session
+// get only the messages for this page
+$page_messages = array_slice($all_messages, $start_position, $msgs_per_page);
+
+// save page messages in another var
+$msgs = $page_messages;
+
+// check if success message exists in session
 $success_msg = '';
 if (isset($_SESSION['success'])) {
     $success_msg = $_SESSION['success'];
@@ -113,40 +138,49 @@ if (isset($_SESSION['error'])) {
             <a href="admin.php">Admin</a>
         </div>
         
-        <!-- messages count -->
+        <!-- messages count info -->
         <div class="messages-info">
-            <p>Total Messages: <?php echo $total_messages; ?> | Page <?php echo $page; ?> of <?php echo $total_pages; ?></p>
+            <p>Total Messages: <?php echo $total; ?> | Page <?php echo $page; ?> of <?php echo $total_pages; ?></p>
         </div>
         
-        <!-- display messages -->
+        <!-- display all messages for this page -->
         <div class="messages">
             <?php
-            // check if there are messages
-            if (count($page_messages) == 0) {
+            // check if there are any messages to show
+            if (count($msgs) == 0) {
                 echo "<p>No messages yet. Be the first to post!</p>";
             }
             
-            // loop through each message
-            foreach ($page_messages as $msg) {
-                // get message content
-                $content = $msg['content'];
+            // loop thru each message and display it
+            foreach ($msgs as $m) {
+                // get the message content text
+                $content = $m['content'];
                 
-                // get timestamp
-                $timestamp = $msg['timestamp'];
+                // store content in another var
+                $msg_text = $content;
                 
-                // format time
-                $time_text = time_ago($timestamp);
+                // get the timestamp when posted
+                $timestamp = $m['timestamp'];
                 
-                // display message card
+                // save timestamp in another var
+                $posted_time = $timestamp;
+                
+                // format time to show how long ago
+                $time_text = time_ago($posted_time);
+                
+                // save time text
+                $time_string = $time_text;
+                
+                // display the message card with content
                 echo "<div class='message-card'>";
-                echo "<p class='message-content'>" . htmlspecialchars($content) . "</p>";
-                echo "<p class='message-time'>" . $time_text . "</p>";
+                echo "<p class='message-content'>" . htmlspecialchars($msg_text) . "</p>";
+                echo "<p class='message-time'>" . $time_string . "</p>";
                 echo "</div>";
             }
             ?>
         </div>
         
-        <!-- pagination -->
+        <!-- pagination links -->
         <?php if ($total_pages > 1): ?>
             <div class="pagination">
                 <?php
