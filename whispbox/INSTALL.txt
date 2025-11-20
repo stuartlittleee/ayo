@@ -1,0 +1,97 @@
+WHISPBOX+ INSTALLATION INSTRUCTIONS
+====================================
+
+Simple steps to get WhispBox+ running on your server
+
+REQUIREMENTS:
+- PHP 7.0 or higher
+- Apache web server
+- Write permissions for data folder
+
+INSTALLATION STEPS:
+
+1. Upload Files
+   - Upload the entire whispbox folder to your web server
+   - Can go in public_html or any subfolder
+
+2. Set Permissions
+   - Make data folder writable
+   - Run this command in terminal:
+     chmod 777 whispbox/data
+     chmod 666 whispbox/data/messages.json
+     chmod 666 whispbox/data/rate_limits.json
+   
+   OR use your FTP client:
+   - Right click on data folder -> Properties -> Set to 777
+   - Right click on json files -> Properties -> Set to 666
+
+3. Access the Site
+   - Open your browser
+   - Go to: http://yoursite.com/whispbox/index.php
+   - You should see the message board!
+
+4. Test Posting
+   - Type a message in the text box
+   - Click "Post Message"
+   - Should see your message appear
+   - Wait 10 seconds before posting again (rate limit)
+
+5. Admin Access
+   - Go to: http://yoursite.com/whispbox/admin.php
+   - Default password is: admin123
+   - You can delete messages here
+
+6. Change Admin Password (IMPORTANT!)
+   - Create a new PHP file called password.php
+   - Put this code in it:
+     <?php
+     echo password_hash('your_new_password', PASSWORD_BCRYPT);
+     ?>
+   - Run it in browser
+   - Copy the hash it shows
+   - Paste it in config.php as $admin_password_hash
+   - Delete password.php file
+
+TROUBLESHOOTING:
+
+Problem: Messages not saving
+Solution: Check data folder permissions (step 2)
+
+Problem: Rate limit not working
+Solution: Check rate_limits.json permissions
+
+Problem: Admin login not working
+Solution: Make sure password is correct (admin123)
+         Session cookies might be blocked
+
+Problem: Page looks broken
+Solution: Make sure style.css loaded properly
+         Check browser console for errors
+
+FEATURES TO TRY:
+
+- Post anonymous messages
+- View messages with pagination
+- Check out the word cloud (wordcloud.php)
+- Login to admin panel (admin.php)
+- Delete inappropriate messages
+- Try posting bad words (they get censored)
+- Try posting twice quickly (rate limited)
+
+CUSTOMIZATION:
+
+To change settings, edit config.php:
+- Max message length (default 500 chars)
+- Messages per page (default 25)
+- Rate limit seconds (default 10)
+- Bad words list
+- Admin password
+
+That's it! Your WhispBox+ should be working now.
+
+If you have problems, check:
+1. PHP version is 7.0+
+2. File permissions are correct
+3. Apache mod_rewrite is enabled (for .htaccess)
+
+Enjoy your anonymous message board!

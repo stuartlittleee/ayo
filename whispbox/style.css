@@ -1,0 +1,362 @@
+/* style.css - basic styling for whispbox */
+
+/* reset some stuff */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* container */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* header */
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 10px;
+}
+
+header h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+header p {
+    font-size: 1.1em;
+    opacity: 0.9;
+}
+
+/* navigation links */
+.nav-links {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    justify-content: center;
+}
+
+.nav-links a {
+    color: #667eea;
+    text-decoration: none;
+    padding: 8px 15px;
+    border: 2px solid #667eea;
+    border-radius: 5px;
+    transition: all 0.3s;
+}
+
+.nav-links a:hover {
+    background-color: #667eea;
+    color: white;
+}
+
+/* success and error messages */
+.success-message {
+    background-color: #2ecc71;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.error-message {
+    background-color: #e74c3c;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* post form */
+.post-form {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+}
+
+.post-form textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 15px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+    font-family: Arial, sans-serif;
+    resize: vertical;
+    margin-bottom: 10px;
+}
+
+.post-form textarea:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.post-form button {
+    background-color: #667eea;
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.post-form button:hover {
+    background-color: #5568d3;
+}
+
+/* messages info */
+.messages-info {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #666;
+}
+
+/* messages */
+.messages {
+    margin-bottom: 30px;
+}
+
+.message-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-bottom: 15px;
+    transition: transform 0.2s;
+}
+
+.message-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.message-content {
+    font-size: 1.1em;
+    margin-bottom: 10px;
+    word-wrap: break-word;
+}
+
+.message-time {
+    color: #999;
+    font-size: 0.9em;
+}
+
+/* pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.pagination a {
+    color: #667eea;
+    text-decoration: none;
+    padding: 8px 15px;
+    border: 2px solid #667eea;
+    border-radius: 5px;
+    transition: all 0.3s;
+}
+
+.pagination a:hover {
+    background-color: #667eea;
+    color: white;
+}
+
+.pagination .current-page {
+    background-color: #667eea;
+    color: white;
+    padding: 8px 15px;
+    border: 2px solid #667eea;
+    border-radius: 5px;
+}
+
+/* admin login */
+.admin-login {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.admin-login h2 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.admin-login input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+    margin-bottom: 15px;
+}
+
+.admin-login input:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.admin-login button {
+    width: 100%;
+    background-color: #667eea;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.admin-login button:hover {
+    background-color: #5568d3;
+}
+
+.admin-login .hint {
+    text-align: center;
+    color: #999;
+    font-size: 0.9em;
+    margin-top: 10px;
+}
+
+/* admin panel */
+.admin-panel {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.admin-panel h2 {
+    margin-bottom: 20px;
+}
+
+.admin-messages {
+    margin-top: 20px;
+}
+
+.admin-message-card {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    border-left: 4px solid #667eea;
+}
+
+.admin-message-card .message-meta {
+    color: #666;
+    font-size: 0.9em;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.admin-message-card .delete-btn {
+    background-color: #e74c3c;
+    color: white;
+    padding: 8px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    display: inline-block;
+    transition: background-color 0.3s;
+}
+
+.admin-message-card .delete-btn:hover {
+    background-color: #c0392b;
+}
+
+/* word cloud */
+.word-cloud {
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    text-align: center;
+    margin-bottom: 30px;
+    line-height: 2;
+}
+
+.word-cloud .word {
+    display: inline-block;
+    margin: 5px;
+    font-weight: bold;
+    transition: transform 0.2s;
+}
+
+.word-cloud .word:hover {
+    transform: scale(1.1);
+}
+
+/* word stats */
+.word-stats {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.word-stats h3 {
+    margin-bottom: 15px;
+}
+
+.word-stats ol {
+    padding-left: 30px;
+}
+
+.word-stats li {
+    margin-bottom: 10px;
+    font-size: 1.1em;
+}
+
+/* footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #999;
+}
+
+/* responsive design */
+@media (max-width: 600px) {
+    .container {
+        padding: 10px;
+    }
+    
+    header h1 {
+        font-size: 2em;
+    }
+    
+    .nav-links {
+        flex-direction: column;
+    }
+    
+    .message-card {
+        padding: 15px;
+    }
+    
+    .word-cloud {
+        padding: 20px;
+    }
+}

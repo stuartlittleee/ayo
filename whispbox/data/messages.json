@@ -1,0 +1,28 @@
+[
+  {
+    "content": "Hello everyone! This is my first message on WhispBox+",
+    "timestamp": 1732107000,
+    "ip": "127.0.0.1"
+  },
+  {
+    "content": "This anonymous message board is really cool!",
+    "timestamp": 1732107120,
+    "ip": "192.168.1.1"
+  },
+  {
+    "content": "I love being able to share my thoughts anonymously",
+    "timestamp": 1732107240,
+    "ip": "10.0.0.1"
+  },
+  {
+    "content": "The word cloud feature is awesome",
+    "timestamp": 1732107360,
+    "ip": "172.16.0.1"
+  },
+  {
+    "content": "Just testing the profanity filter here",
+    "timestamp": 1732107480,
+    "ip": "192.168.1.2"
+  }
+]
+

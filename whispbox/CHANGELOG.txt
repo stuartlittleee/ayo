@@ -1,0 +1,41 @@
+WHISPBOX+ CHANGELOG
+===================
+
+Version 1.0 - November 2024
+- First version!
+- Added message posting
+- Added message display with pagination
+- Added admin panel for moderation
+- Added word cloud feature
+- Added profanity filter
+- Added rate limiting (10 seconds)
+- Made it look nice with CSS
+
+TODO for future versions:
+- Add user accounts maybe?
+- Add like/dislike buttons
+- Add reply to messages
+- Add better word cloud colors
+- Add email notifications for admin
+- Add more bad words to filter
+- Make it work with database instead of JSON
+
+Known Issues:
+- Rate limit resets if you clear cookies
+- Word cloud might not work with less than 10 messages
+- Admin password is hardcoded (need to change in config.php)
+- No CAPTCHA so might get spam
+
+Changes I made today:
+- Created all the files
+- Got pagination working (was hard)
+- Fixed bug where messages wouldnt save
+- Added sample messages for testing
+- Made it responsive for mobile
+- Added comments everywhere
+
+Notes:
+- This is my first PHP project
+- Code might not be perfect but it works
+- Followed tutorials from W3Schools
+- Got help from Stack Overflow for some parts

@@ -1,0 +1,4 @@
+# .htaccess for data folder protection
+
+# deny all access to this folder
+Deny from all
