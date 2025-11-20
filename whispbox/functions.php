@@ -1,29 +1,29 @@
 <?php
-// functions.php - helper functions
+// functions.php - helper functions for the message board
 
-// function to get all messages from json file
+// function to get all mesages from json file
 function get_all_messages() {
     global $messages_file;
     
-    // check if file exists
+    // check if file exists first
     if (!file_exists($messages_file)) {
-        // create empty file
+        // create empty file if it doesnt exist
         file_put_contents($messages_file, json_encode(array()));
         return array();
     }
     
-    // read file
+    // read the file content
     $json_data = file_get_contents($messages_file);
     
-    // decode json
+    // decode json to array
     $messages = json_decode($json_data, true);
     
-    // check if its empty
+    // check if its empty or null
     if (!$messages) {
         $messages = array();
     }
     
-    // return all messages
+    // retrun all messages
     return $messages;
 }
 
@@ -50,17 +50,17 @@ function save_messages($messages) {
     fclose($file);
 }
 
-// function to filter bad words
+// function to filter bad wrods from message
 function filter_bad_words($text) {
     global $bad_words;
     
-    // loop through each bad word
+    // loop thru each bad word in the list
     foreach ($bad_words as $word) {
-        // replace with stars
+        // replace bad word with stars (censored)
         $text = str_ireplace($word, '***', $text);
     }
     
-    // return filtered text
+    // retrun the filtered text
     return $text;
 }
 
