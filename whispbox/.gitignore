@@ -1,0 +1,26 @@
+# files to ignore
+
+# ignore DS_Store on mac
+.DS_Store
+
+# ignore backup files
+*.bak
+*.backup
+*~
+
+# ignore temp files
+temp/
+tmp/
+
+# dont commit these
+password.php
+dbtest.php
+
+# editor files
+.vscode/
+.idea/
+*.swp
+
+# logs
+*.log
+error_log
